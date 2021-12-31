@@ -1,0 +1,36 @@
+ 1. What is the purpose of the “Hello, World!” program?
+ R: To let me try a a programming environment and give me a firts feel of how I can get
+ a computer to do things to me. PAGE 76
+ 
+ 2. Name the four parts of a function.
+ R: A return type (like int, string, etc) wich will return; A name; A parameter list in "()"; And
+ a function (enclosed in a set of "{}". PAGE 80
+ 
+ 3. Name a function that must appear in every C++ program.
+ R: The function "main", that who tells the computer what to execute. PG 80
+ 
+ 4. In the “Hello, World!” program, what is the purpose of the line return 0;?
+ R: A zero returned by main() indicates that the program terminated successfully. PG 80
+ 
+ 5. What is the purpose of the compiler?
+ R: To transform the language of humans to the lang of machines. PG81
+ 
+ 6. What is the purpose of the #include directive?
+ R: To simplify the use of the facilities of C++. PG 79
+ 
+ 7. What does a .h suffix at the end of a file name signify in C++?
+ R: A Header.
+ 
+ 8. What does the linker do for your program?
+ R: Literally, link the source files to a program like a.exe; To be able to be executed.
+ 
+ 9. What is the difference between a source file and an object file?
+ R: The source file is readable to humans, but the object not. The object is one pass less
+ to be an executable. PG 84
+ 
+ 10. What is an IDE and what does it do for you?
+ It simplify the life! The debugging and coding turns much easier if we use IDE'S. PG 85
+ 
+ 11. If you understand everything in the textbook, why is it necessary to 
+practice?
+R: Because it is necessary to developing skills. PG 85
