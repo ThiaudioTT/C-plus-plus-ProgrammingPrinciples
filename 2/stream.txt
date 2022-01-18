@@ -1,0 +1,19 @@
+Toda vez que vir o operador "<<" quero que pense em saída de dados.
+(output)
+
+Toda vez que vir o operador ">>" pense em entrada de dados.
+(input)
+
+Exemplo:
+
+cout << "Olá, mundo!"; // A string "Olá, mundo!" irá ir para cout que consequentemente irá imprimir na tela (saída).
+
+
+string x; // declaração
+cin >> x; // cin irá receber a entrada de dados do usuário que moverá para a memória x.
+
+
+https://www.inf.pucrs.br/~pinho/PRGSWB/Streams/streams.html
+
+
+Conteudo: Stream

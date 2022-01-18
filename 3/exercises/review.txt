@@ -1,0 +1,143 @@
+1. What is meant by the term prompt?
+ R: "The first line of main() simply writes out a message encouraging the user to 
+	enter a first name. Such a message is typically called a prompt because it prompts 
+	the user to take an action"
+	
+Like cambridge's dicionary says, the term prompt is something who force a answer.
+"to make someone decide to say or do something"
+
+2. Which operator do you use to read into a variable?
+R: The input operation >> (“get from”).
+Ch. 3.3
+
+https://www.tutorialspoint.com/cplusplus/input_output_operators_overloading.htm
+(See stream.txt in ../../2)
+
+3. If you want the user to input an integer value into your program for a 
+variable named number, what are two lines of code you could write to 
+ask the user to do it and to input the value into your program?
+R: 
+int number;
+cin>>number;
+
+4. What is \n called and what purpose does it serve?
+R: Sets a newline in the terminal.
+
+
+5. What terminates input into a string?
+R: The whitespaces
+Ch. 3.3
+
+6. What terminates input into an integer?
+R: By whitespaces too. (?)
+
+
+7. How would you write
+		cout << "Hello, ";
+		cout << first_name;
+		cout << "!\n";
+	as a single line of code?
+R:
+	cout<<"Hello, "<<first_name<<"!\n";
+
+8. What is an object?
+R: "An object is some memory that holds a value of a given type."
+Ch. 3.8
+
+9. What is a literal?
+
+R: 
+	1: Literal is a string, like "Mom" or "Candy".
+	2: "Literals represent values of various types. For example, the literal 12 represents 
+the integer value “twelve”
+Ch. A.2
+
+10. What kinds of literals are there?
+R: Integer, floating, char, boolean, string...
+
+11. What is a variable?
+R: Variable is a named object.
+Ch. 3.8
+
+12. What are typical sizes for a char, an int, and a double?
+R: Char: 1 byte, int: 4 bytes, double: 8 bytes. 
+See in sizeof.cpp or Ch. 3.8
+
+13. What measures do we use for the size of small entities in memory, such 
+as ints and strings?
+R: Bytes, wich is 8 bits.
+
+14. What is the difference between = and ==?
+R:
+"=" is the operator to initialize a variable.
+"==" is a operator to compare.
+
+15. What is a definition?
+R: "A definition is a declaration that sets aside memory for an object."
+Ch. 3.8
+
+16. What is an initialization and how does it differ from an assignment?
+R: From chapter 3.5
+Initialization (giving a variable its initial value)
+Assignment (giving a variable a new value)
+
+
+17. What is string concatenation and how do you make it work in C++?
+R: String concatenation is literraly "merge" strings like "jota"+"micael"="jotamicael"
+
+You do concatenation in c++ using the operator +
+
+18. Which of the following are legal names in C++? If a name is not legal, 
+why not?
+Like ch. 3.7 says: 
+"What can be a name in C++? In a C++ program, a 
+name starts with a letter and contains only letters, digits, and underscores."
+
+	This_little_pig //ok, but avoid initializes with caps
+	This_1_is fine //error Whitespace
+	2_For_1_special // error, starting with a number 
+	latest thing //error whitespace 
+	the_$12_method // $ is not a letter 
+	_this_is_ok // error: avoid starting with underscores
+	MiniMineMine // Not so cool, but ok.
+	number // ok
+	correct? // ? is not a letter
+
+19. Give five examples of legal names that you shouldn’t use because they are 
+likely to cause confusion.
+R: 
+MiniMineMine
+that_var
+lllocal
+one0ne
+iletter
+mbv
+x2
+y57
+
+20. What are some good rules for choosing names?
+R:
+The principal is that who will help people undestand my code.
+That is, meaningful names.
+Ch. 3.7
+
+21. What is type safety and why is it important?
+Type safety is "Every object is given a type when it is defined." Unfortunaly 
+c++ have ways to type unsafety, but doing some code rules (good coding practice) this problem is fixed easy.
+
+It is important because reduce errors and are more practical.
+
+22. Why can conversion from double to int be a bad thing?
+R: Because is always rounded to zero.
+Example: 
+double 2.7 will turn into a int 2.
+
+23. Define a rule to help decide if a conversion from one type to another is 
+safe or unsafe.
+R: Well, I think the most simple way to do this is decorating.
+Like the bytes, the char is less to int. (1byte and 4byte) So, it's safe because it won't "narrow".
+
+"So what should you do if you think that a conversion might lead to a bad 
+value? Use {} initializers to avoid accidents, and when you want a conversion, 
+check the value before assigning as we did in the first example in this section. See 
+§5.6.4 and §7.5 for a simplified way of doing such checking. "
