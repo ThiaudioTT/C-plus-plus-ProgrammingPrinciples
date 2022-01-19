@@ -17,17 +17,19 @@ values are the same, they should just be ordered together. So, the input
 
 /*Note: 
     There are many different ways to do this, but I will do based on the book knowledge.
-    That is, according what I learned from now. And this is the hardest way, and I know it.
+    That is, according what I learned from now. And probably this is the hardest way, and I know it.
     I will refactor in the future.*/
 
 #include "../../std_lib_facilities.h"
 
 int main (){
     int x1,x2,x3, smallest, midterm, larger;
-    cout<<"Enter three numbers:\n";
+    cout<<"Enter three integer numbers:\n";
     cin>>x1>>x2>>x3;
 
-    // There are 6 possibilities.
+    /**
+     * @brief Here goes the algorithm
+     */
     //larger x1
     if(x1>=x2 && x1>=x3){
         larger=x1;
@@ -40,10 +42,8 @@ int main (){
             midterm=x3;
             smallest=x2;
         }
-
     //midterm x1
-    //buggy here, see later.
-    } else if((x1>=x2 && x1<=x3) || (x1<=x2 && x1>=x3)){
+    } else if(x1>=x2 && x1<=x3 || x1<=x2 && x1>=x3){
         midterm=x1;
 
         //verifyOthers
@@ -54,7 +54,6 @@ int main (){
             larger=x3;
             smallest=x2;
         }
-
     //smallest x1
     } else if(x1<=x2 && x1<=x3){
         smallest=x1;
@@ -69,6 +68,7 @@ int main (){
         }
     }
 
-    cout<<"\nSmallest = "<<smallest<<"\nMidterm = "<<"\nLarger = "<<larger;
+    //print
+    cout<<"\nSmallest = "<<smallest<<"\nMidterm = "<<midterm<<"\nLarger = "<<larger;
     return 0;
 }
