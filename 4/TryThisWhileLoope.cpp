@@ -2,7 +2,7 @@
  * @file TryThisWhileLoope.cpp
  * @author Thiago Araújo (ThiaudioTT)
  * @brief Try This 3
- * @version 1
+ * @version 1.0.1
  * @date 2022-02-02 (YYYY-MM-DD)
  * 
  * @copyright Copyright (c) 2022
@@ -23,13 +23,10 @@ z 122*/
 // z = 122
 int main(){
     int i = 97;
-    char letter = ' ';
-
 
     cout<<"\nYour ASCII table to decimal is: \n";
     while(i<123){
-        letter = i;
-        cout<<letter<<"\t"<<i<<"\n";
+        cout<<char(i)<<"\t"<<i<<"\n";
         i++;
     }
 
