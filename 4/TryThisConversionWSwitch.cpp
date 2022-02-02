@@ -50,3 +50,5 @@ int main(){
         
     return 0;
 }
+/*
+R: Both versions are good. But the switch statemment looks more good and easy to see, write and understand.*/

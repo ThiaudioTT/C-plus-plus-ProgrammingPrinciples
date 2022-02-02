@@ -31,7 +31,7 @@ int main(){
         cout << coin << "¥ == " << coin*conv_yen << "$\n";
     else if (unit == 'k')
         cout << coin << "kr$ == " << coin*conv_kroner << "$\n";
-    else if(unit=='p')
+    else if(unit == 'p')
         cout << coin << "£ == " << coin*conv_pounds << "$\n";
     else{
         cout<<"I don't know this kind of currency.\n";
