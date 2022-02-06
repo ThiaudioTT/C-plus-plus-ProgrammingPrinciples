@@ -19,7 +19,7 @@ z 122*/
 
 // Foi utilizado: https://web.fe.up.pt/~ee96100/projecto/Tabela%20ascii.htm
 
-#include "../std_lib_facilities.h"
+#include "../../std_lib_facilities.h"
 // z = 122
 int main(){
     int i = 97;
