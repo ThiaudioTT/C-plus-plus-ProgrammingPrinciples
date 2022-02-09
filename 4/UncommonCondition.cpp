@@ -9,3 +9,15 @@
         words.push_back(temp);
     }
 */
+
+
+/*
+
+int a, b;
+
+    cout<<"\nEnter two values: ";
+    while(cin>>a>>b){
+        cout<<"\nHere is your values: "<<a<<" and "<<b<<"\nEnter Again: ";
+    }
+
+*/
