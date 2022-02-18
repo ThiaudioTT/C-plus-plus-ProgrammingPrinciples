@@ -21,3 +21,6 @@ int a, b;
     }
 
 */
+/*
+https://stackoverflow.com/questions/19483126/whats-the-difference-between-whilecin-and-whilecin-num
+https://www.vivaolinux.com.br/topico/C-C++/C-duvida-a-respeito-do-seguinte-comando-while-cin
