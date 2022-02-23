@@ -11,7 +11,6 @@
  * better at programming now. This chapter probably was missing one thing, I guess it is data structure.
  */
 
-
 #include "../../std_lib_facilities.h"
 
 /*Write a program to play a numbers guessing game. The user thinks of a 

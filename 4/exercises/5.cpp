@@ -4,9 +4,7 @@
  * @brief exercise 5 from ch4
  * @version 1
  * @date 2022-02-23 (YYYY-MM-DD)
- * 
  * @copyright Copyright (c) 2022
- * 
  */
 
 /*Write a program that performs as a very simple calculator. Your calculator 
