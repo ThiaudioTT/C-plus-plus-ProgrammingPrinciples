@@ -2,7 +2,7 @@
  * @file 4.cpp
  * @author Thiago Araújo (ThiaudioTT)
  * @brief exercise 4 from chap 4.
- * @version 1
+ * @version 1.0.1
  * @date 2022-02-22 (YYYY-MM-DD)
  * 
  * @copyright Copyright (c) 2022
@@ -100,38 +100,39 @@ int main(){
     // here hoes binary search
     while(true){
         n = find_mid('e',numbers);
-        cout<<"\nIs your number "<<n<<"? ";
+        cout<<"\nIs your number "<<n<<"? "; // first question, ask if is the middle of the array. (Or the unique element on the array)
         cin>>input;
 
-        if(numbers.size()==2 && input=='n'){
+        if(numbers.size()==1){ // verify if is one element
+            cout<<"\nYour number is "<<numbers[0]<<"!";
+            break;
+                
+        } else if(numbers.size()==2 && input=='n'){ // verify if is 2 elements and do a logical guess.
             cout<<"\nSo... your number is "<<numbers[1]<<"\nYaay! (hehe...)";
             break;
-
-        } else if(input=='y'){
+        
+        //here below is the normal binary search.
+        } else if(input=='y'){ // this is the default guess.
             cout<<"\nYaay!";
             break;
 
         } else if(input=='n') {
-            cout<<"Is your number less than "<<n<<"? ";
+            cout<<"Is your number less than "<<n<<"? "; // second question (if is less than n)
             cin>>input;
             
-            if(input=='y'){
+            if(input=='y'){ // if yes, exclude the second part of the array.
                 numbers = divide_exclude(numbers, '2');
                 print_array(numbers);
 
-            } else if(input=='n'){
+            } else if(input=='n'){ // if no, exclude the first part of the array.
                 numbers = divide_exclude(numbers, '1');
                 print_array(numbers);
 
-            } else{
-                cout<<"\nBad inpuut!";
-            }
+            } else{cout<<"\nBad inpuut!";}
+        // if bad input, (it won't modify the array numbers, so is like nothing happens)
+        } else {cout<<"\nBad Input!";}
 
-            
-        } else {
-            cout<<"\nBad Input!";
-        }
-
+        // the code continues until the program guess the number.
     }
     return 0;
 }
