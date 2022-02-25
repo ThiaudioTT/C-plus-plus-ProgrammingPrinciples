@@ -2,7 +2,7 @@
  * @file 6.cpp
  * @author Thiago Araújo (ThiaudioTT)
  * @brief exercise 6
- * @version 1
+ * @version 1.0.1
  * @date 2022-02-25 (YYYY-MM-DD)
  * 
  * @copyright Copyright (c) 2022
@@ -23,15 +23,16 @@ int main(){
     "six","seven","eight","nine"};
     int input = 0;
 
-    while(true){
-        cout<<"\nDigit a number(0-9): ";
-        cin>>input;
+    cout<<"\nDigit a number(0-9): ";
+    while(cin>>input){
 
         if(input>=0 && input<=9){
             cout<<input<<" is "<<values[input];
         } else{
             cout<<"\nEnter a valid value!!";
         }
+
+        cout<<"\nAgain: ";
     }
     return 0;
 }
