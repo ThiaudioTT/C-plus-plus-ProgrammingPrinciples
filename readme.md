@@ -1,4 +1,4 @@
-## Hello!
+# Hello!
 
 > "Programming is the art of expressing solutions to problems so that a computer 
 can execute those solutions. Much of the effort in programming is spent finding 
@@ -9,6 +9,12 @@ This is my reading about the [Programming: Principles and Practice Using C++](ht
 
 
 See more about the author in [here](https://www.stroustrup.com/).
+<br>
+
+## Interesting Topics
+Interesting Topics are topics, that I learned reading the book or other thing, who probably I will use later. They are nest within the `readme.md` file in each chapter.
+
+<br>
 
 #### Good websites for documentations:
 - https://www.w3schools.com/cpp/
