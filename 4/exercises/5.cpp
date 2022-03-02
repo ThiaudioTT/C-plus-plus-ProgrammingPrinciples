@@ -23,7 +23,7 @@ int main(){
     char operation = '0';
     cout<<"\nEnter 2 numbers and a operation: ";
 
-    while(cin>>a>>b>>operation){
+    while(cin>>a>>operation>>b){
         switch(operation){
             case '+':
                 cout<<"\nThe sum of "<<a<<" and "<<b<<" is "<<a+b;
