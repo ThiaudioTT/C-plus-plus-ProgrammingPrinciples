@@ -2,7 +2,7 @@
  * @file 16.cpp
  * @author Thiago Araújo (ThiaudioTT)
  * @brief exercise 16, algorithm to search mode.
- * @version 1
+ * @version 1.0.1
  * @date 2022-03-14 (YYYY-MM-DD)
  * 
  * @copyright Copyright (c) 2022
@@ -53,7 +53,7 @@ int findmode(vector<int> array)
             }
         }
 
-        if(times>record)
+        if(times>=record)
         {
             record = times;
             mode = array[i];
