@@ -1,0 +1,184 @@
+# Review
+
+1 - Name four major types of errors and briefly define each one.
+R: ch.5.1
+
+Compile time error -> errors found by the compiler, like syntax errors and type errors.
+
+Link-time errors -> Errors found by the linker when it is trying to combine object files into an executable program
+
+Run-time errors -> Errors found by checks in a running program.
+
+Logic errors -> errors found by the programmer looking for the causes of erroneous results. 
+
+2. What kinds of errors can we ignore in student programs?
+R: Ch.5.1 
+When that error is not supposed to your program detect.
+
+3. What guarantees should every completed project offer?
+R: 
+>> Should produce the desired results for all legal inputs
+>> Should give reasonable error messages for all illegal inputs
+>> Need not worry about misbehaving hardware
+>> Need not worry about misbehaving system software
+>> Is allowed to terminate after finding an erro
+
+4. List three approaches we can take to eliminate errors in programs and 
+produce acceptable software.
+R:
+When we write programs, errors are natural and unavoidable; the question 
+is: How do we deal with them? Our guess is that avoiding, finding, and correcting 
+errors takes 90% or more of the effort when developing serious software.
+For safety-critical programs, the effort can be greater still.
+
+- Organize software to minimize errors.
+- Eliminate most of the errors we made through debugging and testing.
+- Make sure the remaining errors are not serious.
+
+(See the entire ch5.1)
+
+5. Why do we hate debugging?
+R: In my opinion, I do not hate debugging, search for errors is actually cool and pratically unavoidable.
+See 5.9 for the author`s opinion.
+
+6. What is a syntax error? Give five examples.
+R: Is a compile-time error. Ch.5.3.1. Is like gramatical errors, but in programming languages.
+Ex:
+
+Cout < "hi 
+
+instead of
+
+cout<<"hi";
+
+7. What is a type error? Give five examples.
+R: A compile time error, ch5.3.2.
+
+Mismatches between the types you declared (or forgot to 
+declare) for your variables, functions, etc. and the types of values or expressions 
+you assign to them, pass as function arguments, etc.
+
+ls(4); // undeclared function
+
+area("40", "what"); // can't convert string to int.
+
+8. What is a linker error? Give three examples.
+R: 5.4
+"A program consists of several separately compiled parts, called translation units. 
+Every function in a program must be declared with exactly the same type in
+every translation unit in which it is used. We use header files to ensure that;"
+
+The examples is when you declare a function in other file, but forgot or misspell the function in
+your actual code.
+
+The main objective of learn you can ge here is: linker error is a error generated when the process of linking (link, compile and run)
+generates a error. 
+
+9. What is a logic error? Give three examples.
+R:
+"Logic errors are usually the most 
+difficult to find and eliminate, because at this stage the computer does what you 
+asked it to. Your job now is to figure out why that wasn’t really what you meant. 
+Basically, a computer is a very fast moron. It does exactly what you tell it to do, 
+and that can be most humbling."
+
+Basically, is when you tried to do something, but you wrote other thing. Like:
+
+The sum of 2 numbers
+You write 2*5 instead of 2+5. And so on.
+
+10. List four potential sources of program errors discussed in the text.
+R: See ch5.2
+Poor specification, incomplete programs, unexpected arguments and a logical error.
+
+11. How do you know if a result is plausible? What techniques do you have 
+to answer such questions?
+R: ch 5.8 Estimation !
+Using common sense and estimation you can conclude if a result is plausible.
+Always ask yourself this question:
+    Is this answer to this particular problem plausible?
+You should also ask the more general (and often far harder) question:
+    How would I recognize a plausible result?
+
+12. Compare and contrast having the caller of a function handle a run-time error vs. 
+the called function’s handling the run-time error.
+R: Ch5.5
+
+It depends...
+
+The caller deals with the error when we couldn't modify the funcion.
+See the entire ch5.5 for more.
+
+13. Why is using exceptions a better idea than returning an “error value”?
+R: See ch5.6
+" The fundamental idea is to separate detection of an 
+error (which should be done in a called function) from the handling of an error 
+(which should be done in the calling function) while ensuring that a detected error 
+cannot be ignored; that is, exceptions provide a mechanism that allows us to combine the best of the various approaches to error handling we have explored so far. 
+Nothing makes error handling easy, but exceptions make it easier."
+
+14. How do you test if an input operation succeeded?
+R:
+"Once bad input is detected, it is dealt with using the same techniques 
+and language features as argument errors and range errors."
+
+15. Describe the process of how exceptions are thrown and caught. 
+R:CH5.6
+The basic idea is that if a function finds an error that it cannot handle, it does 
+not return normally; instead, it throws an exception indicating what went wrong. 
+Any direct or indirect caller can catch the exception, that is, specify what to do if 
+the called code used throw. A function expresses interest in exceptions by using a 
+try-block (as described in the following subsections) listing the kinds of exceptions 
+it wants to handle in the catch parts of the try-block. If no caller catches an exception, the program terminates.
+
+16. Why, with a vector called v, is v[v.size()] a range error? What would be 
+the result of calling this?
+R: Because is out of range. The v.size() return the number of the elements.
+The indexes of vectors start with 0, so if a vector has 7 items on it, the indexes will be: 0,1,...,6
+
+17. Define pre-condition and post-condition; give an example (that is not the area()
+function from this chapter), preferably a computation that requires a loop.
+Ch5.10
+
+pre-condition checks if the arguments are ok, post condition checks if the return value is ok.
+
+int sumOneTen(int a, int b) // sum 1, ..., 10
+// Only numbers from 1 to 10.
+{
+    if(a>10 || b>10){ // pre condition
+        cout<<"ERROR! precondition";
+    }
+
+    int sum = 0;
+    sum = a + b;
+
+    if(sum>20){ // post condition, the max value of sum is 20 (10+10)
+        cout<<"ERROR! post condition";
+    }
+    
+}
+
+18. When would you not test a pre-condition?
+R:ch5.10
+• Nobody would give bad arguments. 
+• It would slow down my code.
+• It is too complicated to check.
+
+19. When would you not test a post-condition?
+R: same as question 18
+
+20. What are the steps in debugging a program?
+R: ch5.9
+Get the program to compile.
+Get the program to link.
+Get the program to do what it is supposed to do.
+
+21. Why does commenting help when debugging?
+R: See 5.9.1
+Make the program easy to read so that you have a chance of spotting the bugs
+
+22. How does testing differ from debugging?
+R:is executing a program with a large and systematically selected set of inputs and comparing the results to what was expected. A 
+run with a given set of inputs is called a test case. Realistic programs can require 
+millions of test cases. 
+See ch5.11
