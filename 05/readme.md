@@ -16,3 +16,5 @@ https://www.w3schools.com/cpp/cpp_exceptions.asp
 
 - See: <br>
 https://joellaity.com/2020/01/25/linking.html
+
+bug hunting in 07.cpp exercise
