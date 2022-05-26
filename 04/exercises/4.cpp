@@ -87,45 +87,39 @@ void print_array(vector<int> array){
 
 int main(){
     char input = '0';
-    int n = 0;
-    // here you choose what array do you want:
+
     vector<int> numbers;
-    for(int i = 1; i<101; i++)
+    for(int i = 1; i<101; i++) // add 100 numbers to it.
         numbers.push_back(i);
 
+    int n = 0, 
+        l = 0, h = numbers.size() - 1; // vars to binary search
     
     cout<<"\nChoose a number in your mind, I will try to guess it.\n";
 
-    // here hoes binary search
-    while(true){
-        n = find_mid('e',numbers);
-        cout<<"\nIs your number "<<n<<"? "; // first question, ask if is the middle of the array. (Or the unique element on the array)
+    // here goes binary search
+    while(h>=l){
+        n = l + (h - l) / 2;
+        cout<<"\nIs your number "<<numbers[n]<<"? "; // first question, ask if is the middle of the array. (Or the unique element on the array)
         cin>>input;
 
         if(numbers.size()==1){ // verify if is one element
             cout<<"\nYour number is "<<numbers[0]<<"!";
             break;
                 
-        } else if(numbers.size()==2 && input=='n'){ // verify if is 2 elements and do a logical guess.
-            cout<<"\nSo... your number is "<<numbers[1]<<"\nYaay! (hehe...)";
-            break;
-        
-        //here below is the normal binary search.
         } else if(input=='y'){ // this is the default guess.
             cout<<"\nYaay!";
             break;
 
         } else if(input=='n') {
-            cout<<"Is your number less than "<<n<<"? "; // second question (if is less than n)
+            cout<<"Is your number less than "<<numbers[n]<<"? "; // second question (if is less than n)
             cin>>input;
             
-            if(input=='y'){ // if yes, exclude the second part of the array.
-                numbers = divide_exclude(numbers, '2');
-                print_array(numbers);
+            if(input=='y'){
+                h = n - 1;
 
             } else if(input=='n'){ // if no, exclude the first part of the array.
-                numbers = divide_exclude(numbers, '1');
-                print_array(numbers);
+                l = n + 1;
 
             } else{cout<<"\nBad inpuut!";}
         // if bad input, (it won't modify the array numbers, so is like nothing happens)
