@@ -7,6 +7,9 @@ process of programming a solution for it." ~Stroustrup
 
 This is my reading about the [Programming: Principles and Practice Using C++](https://www.amazon.com/dp/B00KPTEH8C/)
 
+### Note:
+Maybe the answers here isn't 100% perfect. Learning is a continuous process.
+This is only a guided C++ study. And should not only be the unique material to learn.
 
 See more about the author in [here](https://www.stroustrup.com/).
 <br>

@@ -2,6 +2,9 @@
 *.exe
 *.out
 .vscode/
+.cmake-build-debug/
+.idea/
 tempCodeRunnerFile.cpp
 test.cpp
 teste.cpp
+CMakeLists.txt
