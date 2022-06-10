@@ -1,0 +1,20 @@
+Sentence:
+    article noun Verb
+    Noun Verb
+    Sentence Conjunction Sentence // e.g., Birds fly but fish swim
+Conjunction:
+    "and"
+    "or"
+    "but"
+Noun:
+    "birds"
+    "fish"
+    "C++"
+Verb:
+    "rules"
+    "fly"
+    "swim"
+article //definite and indefinite are different, but for this problem, let's it is equal.
+    "The"
+    "a"
+    "an"

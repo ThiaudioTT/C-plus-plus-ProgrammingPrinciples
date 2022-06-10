@@ -1,0 +1,17 @@
+Expression
+    conj
+    conj conj
+
+conj
+    data "&" data
+    data "|" data
+    data "^" data
+
+
+data
+    0
+    1
+
+unnary
+    "!"data
+    "~"data
