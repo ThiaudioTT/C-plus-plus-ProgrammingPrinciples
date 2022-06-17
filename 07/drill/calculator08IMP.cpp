@@ -1,25 +1,13 @@
 /*
-Implemented calculator acordding to the 
-drill exercises
-*/
-
-
-/*
-	calculator08buggy.cpp
-
-	Helpful comments removed.
-
-	We have inserted 3 bugs that the compiler will catch and 3 that it won't.
-
-	I was able to pass it, thanks:
-	https://github.com/glucu/stroustrup-ppp/blob/main/chapter-7/calculator08buggy.cpp
-
+Implemented calculator acordding to the
+the remainder of the drill exercises.
 */
 
 #include "../../std_lib_facilities.h"
+#include <cmath>
 
-struct Token
-{ // define Token structure / class
+struct Token // define Token structure / class
+{
 	char kind;
 	double value;
 	string name;
@@ -28,8 +16,8 @@ struct Token
 	Token(char ch, string n) : kind{ch}, name{n} {} // a error was here
 };
 
-class Token_stream
-{ // define token_stream to deal with stream of tokens
+class Token_stream // define token_stream to deal with stream of tokens
+{
 public:
 	Token_stream() : full(0), buffer(0) {}
 
@@ -47,12 +35,15 @@ private: // probably an error?
 	Token buffer;
 };
 
+// Token squareRoot(); // to get use
+
 // const vars to use in token_stream.get()
 const char let = 'L';
 const char quit = 'Q';
 const char print = ';';
 const char number = '8';
 const char name = 'a';
+const char squareRoot = 'S';
 
 Token Token_stream::get() // get the next token
 {
@@ -75,6 +66,7 @@ Token Token_stream::get() // get the next token
 	case '/':
 	case '%':
 	case '=':
+	case '^':
 		return Token(ch);
 	case '.':
 	case '0':
@@ -93,6 +85,8 @@ Token Token_stream::get() // get the next token
 		cin >> val;
 		return Token(number, val);
 	}
+	case '#':
+		return Token(let);
 	default:
 		if (isalpha(ch))
 		{
@@ -101,9 +95,12 @@ Token Token_stream::get() // get the next token
 			while (cin.get(ch) && (isalpha(ch) || isdigit(ch)))
 				s += ch; // was a logic bug here
 			cin.unget();
-			if (s == "let")
-				return Token(let);
-			if (s == "quit")
+			// if (s == "let")
+			// 	return Token(let);
+			if (s == "sqrt")
+				return Token(squareRoot);
+			// if (s == "quit")
+			if (s == "exit")
 				return Token(quit); // error here
 			return Token(name, s);
 		}
@@ -179,7 +176,7 @@ double primary()
 		t = ts.get();
 		if (t.kind != ')')
 			error("')' expected"); // logic bug here
-		return d; // other logic error.
+		return d;				   // other logic error.
 	}
 	case '-':
 		return -primary();
@@ -187,6 +184,13 @@ double primary()
 		return t.value;
 	case name:
 		return get_value(t.name);
+	case squareRoot:
+	{
+		double x = expression();
+		if(x<0)
+			error("Error: Negative square root");
+		return sqrt(x);
+	}
 	default:
 		error("primary expected");
 	}
@@ -211,17 +215,21 @@ double term()
 			left /= d;
 			break;
 		}
-		case '%':
-		{ // why didn't include remainder operator?
+		case '%': // why didn't include remainder operator?
+		{ 
 			int i1{narrow_cast<int>(left)};
 			int i2{narrow_cast<int>(primary())};
 			if (i2 == 0)
 				error("%: divide by zero");
 			left = i1 % i2;
-			t = ts.get();
 			break;
 		}
-
+		case '^': //power
+		{
+			int b{narrow_cast<int>(primary())};
+			left = pow(left, b);
+			break;
+		}
 		default:
 			ts.unget(t);
 			return left;
@@ -289,9 +297,8 @@ const string result = "= ";
 
 void calculate()
 {
-    /*Predefined names*/
-    names.push_back(Variable("k", 1000));
-
+	/*Predefined names*/
+	names.push_back(Variable("k", 1000));
 
 	while (true)
 		try
