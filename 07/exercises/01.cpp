@@ -1,15 +1,13 @@
-
-/*
-	calculator08buggy.cpp
-
-	Helpful comments removed.
-
-	We have inserted 3 bugs that the compiler will catch and 3 that it won't.
-
-	I was able to pass it, thanks:
-	https://github.com/glucu/stroustrup-ppp/blob/main/chapter-7/calculator08buggy.cpp
-
-*/
+/**
+ * @file 01.cpp
+ * @author Thiago A. (`)
+ * @brief 
+ * @version 0.1
+ * @date 2022-06-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 
 #include "../../std_lib_facilities.h"
 
@@ -89,11 +87,11 @@ Token Token_stream::get() // get the next token
 		return Token(number, val);
 	}
 	default:
-		if (isalpha(ch))
+		if (isalpha(ch) || ch == '_') // added underscores
 		{
 			string s;
 			s += ch;
-			while (cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+			while (cin.get(ch) && ( ( isalpha(ch) || isdigit(ch) ) || ch == '_')) // is digit alpha or underscore?
 				s += ch; // was a logic bug here
 			cin.unget();
 			if (s == "let")

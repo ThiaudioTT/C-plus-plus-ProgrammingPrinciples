@@ -1,15 +1,14 @@
 
-/*
-	calculator08buggy.cpp
-
-	Helpful comments removed.
-
-	We have inserted 3 bugs that the compiler will catch and 3 that it won't.
-
-	I was able to pass it, thanks:
-	https://github.com/glucu/stroustrup-ppp/blob/main/chapter-7/calculator08buggy.cpp
-
-*/
+/**
+ * @file 02.cpp
+ * @author Thiago A. (`)
+ * @brief 
+ * @version 0.1
+ * @date 2022-06-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 
 #include "../../std_lib_facilities.h"
 
@@ -31,6 +30,9 @@ public:
 	Token get();
 	void unget(Token t)
 	{
+        if(full)
+            error("WARNING: buffer already full");
+
 		buffer = t;
 		full = true;
 	}
@@ -48,6 +50,7 @@ const char quit = 'Q';
 const char print = ';';
 const char number = '8';
 const char name = 'a';
+const char assign = '#';
 
 Token Token_stream::get() // get the next token
 {
@@ -71,6 +74,8 @@ Token Token_stream::get() // get the next token
 	case '%':
 	case '=':
 		return Token(ch);
+	case assign:
+		return Token(assign);
 	case '.':
 	case '0':
 	case '1':
@@ -89,11 +94,11 @@ Token Token_stream::get() // get the next token
 		return Token(number, val);
 	}
 	default:
-		if (isalpha(ch))
+		if (isalpha(ch) || ch == '_') // added underscores
 		{
 			string s;
 			s += ch;
-			while (cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+			while (cin.get(ch) && ( ( isalpha(ch) || isdigit(ch) ) || ch == '_')) // is digit alpha or underscore?
 				s += ch; // was a logic bug here
 			cin.unget();
 			if (s == "let")
@@ -138,10 +143,9 @@ double get_value(string s)
 	error("get: undefined name ", s);
 }
 
-// whats the meaning of set_value()?
 void set_value(string s, double d)
 {
-	for (int i = 0; i < names.size(); ++i) // probably an error i<= (out of range)
+	for (int i = 0; i < names.size(); ++i)
 		if (names[i].name == s)
 		{
 			names[i].value = d;
@@ -182,6 +186,7 @@ double primary()
 		return t.value;
 	case name:
 		return get_value(t.name);
+    // }
 	default:
 		error("primary expected");
 	}
@@ -260,6 +265,21 @@ double declaration() // deals with declaration of let
 	return d;
 }
 
+double assignment()
+{
+	string name;
+	cin >> name;
+	
+	Token t = ts.get();
+	if(t.kind != '=')
+		error("= missing in assignment of ", name);
+	
+	double d = expression();
+	set_value(name, d);
+	return d;
+}
+
+
 double statement() // deals with let
 {
 	Token t = ts.get();
@@ -267,6 +287,8 @@ double statement() // deals with let
 	{
 	case let:
 		return declaration();
+	case assign:
+		return assignment();
 	default:
 		ts.unget(t);
 		return expression();

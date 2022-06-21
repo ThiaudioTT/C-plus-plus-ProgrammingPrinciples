@@ -1,15 +1,23 @@
-
 /*
-	calculator08buggy.cpp
-
-	Helpful comments removed.
-
-	We have inserted 3 bugs that the compiler will catch and 3 that it won't.
-
-	I was able to pass it, thanks:
-	https://github.com/glucu/stroustrup-ppp/blob/main/chapter-7/calculator08buggy.cpp
+The get_value(), set_value(), is_declared(), and define_name() functions 
+all operate on the variable var_table. Define a class called Symbol_table
+with a member var_table of type vector<Variable> and member functions
+get(), set(), is_declared(), and declare(). Rewrite the calculator to use a 
+variable of type Symbol_table.
 
 */
+
+
+/**
+ * @file 02.cpp
+ * @author Thiago A. (`)
+ * @brief 
+ * @version 0.1
+ * @date 2022-06-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 
 #include "../../std_lib_facilities.h"
 
@@ -31,13 +39,16 @@ public:
 	Token get();
 	void unget(Token t)
 	{
+        if(full)
+            error("WARNING: buffer already full");
+
 		buffer = t;
 		full = true;
 	}
 
 	void ignore(char);
 
-private: // probably an error?
+private:
 	bool full;
 	Token buffer;
 };
@@ -48,6 +59,8 @@ const char quit = 'Q';
 const char print = ';';
 const char number = '8';
 const char name = 'a';
+const char assign = '#';
+const char constant = 'C';
 
 Token Token_stream::get() // get the next token
 {
@@ -71,6 +84,8 @@ Token Token_stream::get() // get the next token
 	case '%':
 	case '=':
 		return Token(ch);
+	case assign:
+		return Token(assign);
 	case '.':
 	case '0':
 	case '1':
@@ -89,17 +104,19 @@ Token Token_stream::get() // get the next token
 		return Token(number, val);
 	}
 	default:
-		if (isalpha(ch))
+		if (isalpha(ch) || ch == '_') // added underscores
 		{
 			string s;
 			s += ch;
-			while (cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+			while (cin.get(ch) && ( ( isalpha(ch) || isdigit(ch) ) || ch == '_')) // is digit alpha or underscore?
 				s += ch; // was a logic bug here
 			cin.unget();
 			if (s == "let")
 				return Token(let);
+            if(s == "const")
+                return Token(constant);
 			if (s == "quit")
-				return Token(quit); // error here
+				return Token(quit);
 			return Token(name, s);
 		}
 		error("Bad token");
@@ -121,44 +138,57 @@ void Token_stream::ignore(char c) // function to ignore chars until c
 			return;
 }
 
+
 struct Variable // struct data to define Variable type.
 {
 	string name;
 	double value;
-	Variable(string n, double v) : name(n), value(v) {}
+    bool constant;
+	Variable(string n, double v, bool c) : name(n), value(v), constant(c) {}
 };
 
-vector<Variable> names; // vector to put Variable type into it
+class Symbol_table { // array user defined type to put variables names in it and its own functions used in calc.
+public:
+    double get_value(string s);
+    void set_value(string s, double d);
+    bool is_declared(string s);
+    double declaration(bool c);
+    double assignment();
+private:
+    vector<Variable> var_table;
+};
 
-double get_value(string s)
+double Symbol_table::get_value(string s)
 {
-	for (int i = 0; i < names.size(); ++i)
-		if (names[i].name == s)
-			return names[i].value;
+	for (int i = 0; i < var_table.size(); ++i)
+		if (var_table[i].name == s)
+			return var_table[i].value;
 	error("get: undefined name ", s);
 }
 
-// whats the meaning of set_value()?
-void set_value(string s, double d)
+void Symbol_table::set_value(string s, double d)
 {
-	for (int i = 0; i < names.size(); ++i) // probably an error i<= (out of range)
-		if (names[i].name == s)
+	for (int i = 0; i < var_table.size(); ++i)
+		if (var_table[i].name == s)
 		{
-			names[i].value = d;
+            if(var_table[i].constant)
+                error("set: impossible assign to a constant value");
+			var_table[i].value = d;
 			return;
 		}
 	error("set: undefined name ", s);
 }
 
-bool is_declared(string s) // function to know if a variable is already declared
+bool Symbol_table::is_declared(string s)
 {
-	for (int i = 0; i < names.size(); ++i)
-		if (names[i].name == s)
+	for (int i = 0; i < var_table.size(); ++i)
+		if (var_table[i].name == s)
 			return true;
 	return false;
 }
 
-Token_stream ts;
+Token_stream ts; // to deal with stream of tokens
+Symbol_table variables; // structure to put names of var in it
 
 double expression();
 
@@ -181,7 +211,8 @@ double primary()
 	case number:
 		return t.value;
 	case name:
-		return get_value(t.name);
+		return variables.get_value(t.name);
+    // }
 	default:
 		error("primary expected");
 	}
@@ -244,7 +275,7 @@ double expression()
 	}
 }
 
-double declaration() // deals with declaration of let
+double Symbol_table::declaration(bool c) // deals with declaration of let
 {
 	Token t = ts.get();
 	if (t.kind != 'a') // error here
@@ -256,17 +287,42 @@ double declaration() // deals with declaration of let
 	if (t2.kind != '=')
 		error("= missing in declaration of ", name);
 	double d = expression();
-	names.push_back(Variable(name, d));
+    
+    if(c)
+    {
+        var_table.push_back(Variable(name, d, true));
+        return d;
+    }
+    var_table.push_back(Variable(name, d, false));
 	return d;
 }
 
-double statement() // deals with let
+double Symbol_table::assignment()
+{
+	string name;
+	cin >> name;
+	
+	Token t = ts.get();
+	if(t.kind != '=')
+		error("= missing in assignment of ", name);
+	
+	double d = expression();
+	set_value(name, d);
+	return d;
+}
+
+
+double statement() // deals with variables
 {
 	Token t = ts.get();
 	switch (t.kind)
 	{
 	case let:
-		return declaration();
+		return variables.declaration(false);
+    case constant: // constant declaration
+        return variables.declaration(true);
+	case assign:
+		return variables.assignment();
 	default:
 		ts.unget(t);
 		return expression();

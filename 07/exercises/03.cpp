@@ -1,15 +1,14 @@
 
-/*
-	calculator08buggy.cpp
-
-	Helpful comments removed.
-
-	We have inserted 3 bugs that the compiler will catch and 3 that it won't.
-
-	I was able to pass it, thanks:
-	https://github.com/glucu/stroustrup-ppp/blob/main/chapter-7/calculator08buggy.cpp
-
-*/
+/**
+ * @file 02.cpp
+ * @author Thiago A. (`)
+ * @brief 
+ * @version 0.1
+ * @date 2022-06-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 
 #include "../../std_lib_facilities.h"
 
@@ -31,6 +30,9 @@ public:
 	Token get();
 	void unget(Token t)
 	{
+        if(full)
+            error("WARNING: buffer already full");
+
 		buffer = t;
 		full = true;
 	}
@@ -48,6 +50,8 @@ const char quit = 'Q';
 const char print = ';';
 const char number = '8';
 const char name = 'a';
+const char assign = '#';
+const char constant = 'C';
 
 Token Token_stream::get() // get the next token
 {
@@ -71,6 +75,8 @@ Token Token_stream::get() // get the next token
 	case '%':
 	case '=':
 		return Token(ch);
+	case assign:
+		return Token(assign);
 	case '.':
 	case '0':
 	case '1':
@@ -89,17 +95,19 @@ Token Token_stream::get() // get the next token
 		return Token(number, val);
 	}
 	default:
-		if (isalpha(ch))
+		if (isalpha(ch) || ch == '_') // added underscores
 		{
 			string s;
 			s += ch;
-			while (cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+			while (cin.get(ch) && ( ( isalpha(ch) || isdigit(ch) ) || ch == '_')) // is digit alpha or underscore?
 				s += ch; // was a logic bug here
 			cin.unget();
 			if (s == "let")
 				return Token(let);
+            if(s == "const")
+                return Token(constant);
 			if (s == "quit")
-				return Token(quit); // error here
+				return Token(quit);
 			return Token(name, s);
 		}
 		error("Bad token");
@@ -125,7 +133,8 @@ struct Variable // struct data to define Variable type.
 {
 	string name;
 	double value;
-	Variable(string n, double v) : name(n), value(v) {}
+    bool constant;
+	Variable(string n, double v, bool c) : name(n), value(v), constant(c) {}
 };
 
 vector<Variable> names; // vector to put Variable type into it
@@ -138,12 +147,13 @@ double get_value(string s)
 	error("get: undefined name ", s);
 }
 
-// whats the meaning of set_value()?
 void set_value(string s, double d)
 {
-	for (int i = 0; i < names.size(); ++i) // probably an error i<= (out of range)
+	for (int i = 0; i < names.size(); ++i)
 		if (names[i].name == s)
 		{
+            if(names[i].constant)
+                error("set: impossible assign to a constant value");
 			names[i].value = d;
 			return;
 		}
@@ -182,6 +192,7 @@ double primary()
 		return t.value;
 	case name:
 		return get_value(t.name);
+    // }
 	default:
 		error("primary expected");
 	}
@@ -244,7 +255,7 @@ double expression()
 	}
 }
 
-double declaration() // deals with declaration of let
+double declaration(bool c) // deals with declaration of let
 {
 	Token t = ts.get();
 	if (t.kind != 'a') // error here
@@ -256,17 +267,42 @@ double declaration() // deals with declaration of let
 	if (t2.kind != '=')
 		error("= missing in declaration of ", name);
 	double d = expression();
-	names.push_back(Variable(name, d));
+    
+    if(c)
+    {
+        names.push_back(Variable(name, d, true));
+        return d;
+    }
+    names.push_back(Variable(name, d, false));
 	return d;
 }
 
-double statement() // deals with let
+double assignment()
+{
+	string name;
+	cin >> name;
+	
+	Token t = ts.get();
+	if(t.kind != '=')
+		error("= missing in assignment of ", name);
+	
+	double d = expression();
+	set_value(name, d);
+	return d;
+}
+
+
+double statement() // deals with variables
 {
 	Token t = ts.get();
 	switch (t.kind)
 	{
 	case let:
-		return declaration();
+		return declaration(false);
+    case constant: // constant declaration
+        return declaration(true);
+	case assign:
+		return assignment();
 	default:
 		ts.unget(t);
 		return expression();
