@@ -1,0 +1,36 @@
+// I'm not good at grammar, I think.
+
+Statement:
+    Expression
+    Expression; Expression; ...
+    Print
+    Quit
+Print:
+    ;
+Quit:
+    q
+Expression:
+    Term
+    Expression + Term
+    Expression – Term
+Term:
+    Primary
+    Term * Primary
+    Term / Primary
+    Term % Primary
+Primary:
+    Number
+    ( Expression )
+    – Primary
+    + Primary
+
+Number:
+    floating-point-literal
+    Variable
+
+Variable:
+    Expression
+
+
+calculate() will deal with the grammar and main() will deal with errors
+and the execution of the program.
