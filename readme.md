@@ -38,7 +38,7 @@ Interesting Topics are topics, that I learned reading the book or other thing, w
 
 https://www.youtube.com/c/TheChernoProject
 
-https://www.youtube.com/c/TheChernoProject
+https://www.youtube.com/c/CodeBeauty/
 
 <br>
 
