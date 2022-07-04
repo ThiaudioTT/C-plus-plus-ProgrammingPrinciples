@@ -1,11 +1,13 @@
 /*
-Read five names into a vector<string> name, then prompt the user for
-the ages of the people named and store the ages in a vector<double> age.
+07 Read five names into a vector<string> name, then prompt the user for 
+the ages of the people named and store the ages in a vector<double> age. 
 Then print out the five (name[i],age[i]) pairs. Sort the names (sort(name
-.begin(),name.end())) and print out the (name[i],age[i]) pairs. The tricky
-part here is to get the age vector in the correct order to match the sorted
-name vector. Hint: Before sorting name, take a copy and use that to
-make a copy of age in the right order after sorting name.
+.begin(),name.end())) and print out the (name[i],age[i]) pairs. The tricky 
+part here is to get the age vector in the correct order to match the sorted 
+name vector. Hint: Before sorting name, take a copy and use that to 
+make a copy of age in the right order after sorting name. 
+
+08. Then, do that exercise again but allowing an arbitrary number of names.
 */
 
 #include <iostream>
@@ -17,17 +19,19 @@ int main()
 {
     vector<string> name;
     vector<int> age;
-
-    cout << "Write five names: ";
-    int n = 5;
+    
+    cout << "\nHow many people will you catalog? ";
+    int n;
+    cin >> n;
+    cout << "\nWrite " << n << " names: ";
     while (n--)
     {
         string nameInput;
         cin >> nameInput;
         name.push_back(nameInput);
     }
-    n = 5;
-    cout << endl << "Write five ages for that names: ";
+    n = name.size();
+    cout << endl << "Write " << name.size() << " ages for that names: ";
     while (n--)
     {
         int ageInput;
