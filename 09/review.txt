@@ -1,0 +1,110 @@
+1. What are the two parts of a class, as described in the chapter?
+R:
+The public and private members.
+
+2. What is the difference between the interface and the implementation in a
+class?
+R:
+Ch 9.3
+The
+interface is the part of the class’s declaration that its users access directly. The
+implementation is that part of the class’s declaration that its users access only indi-
+rectly through the interface. The public interface is identified by the label public:
+and the implementation by the label private: .
+
+3. What are the limitations and problems of the original Date struct that is
+created in the chapter?
+R:
+Their members are global and doesnt have private members. This is: is too simple.
+
+As long as we leave the representation of Date accessible to everybody, somebody
+will — by accident or design — mess it up; that is, someone will do something that
+produces an invalid value. ch9.4.3;
+
+4. Why is a constructor used for the Date type instead of an init_day()
+function?
+R:
+That's the basic of classes. It is better to initialize with a constructor rather than a function. The constructor is simple and permits more or less arguments,  making it flexible.
+
+5. What is an invariant? Give examples.
+R:
+A rule for what constitutes a valid value is called an invariant. The invariant
+for Date (“A Date must represent a day in the past, present, or future”)
+
+6. When should functions be put in the class definition, and when should
+they be defined outside the class? Why?
+R:
+When a function does not represent the class, they need to be outside. When a function is
+a helper function, they need to be outisde.
+
+Outro:
+The obvious rule of thumb is: Don’t put member function bodies in the class
+declaration unless you know that you need the performance boost from inlining
+tiny functions. Large functions, say five or more lines of code, don’t benefit from
+inlining and make a class declaration harder to read. We rarely inline a function
+that consists of more than one or two expressions. ch 9,4,4
+
+7. When should operator overloading be used in a program? Give a list of
+operators that you might want to overload (each with a reason).
+R:
+ch 9,6
+You can define almost all C++ operators for class or enumeration operands.
+That’s often called operator overloading. We use it when we want to provide conven-
+tional notation for a type we design.
+
+It is generally a good idea not to define operators for a type unless you are re-
+ally certain that it makes a big positive change to your code. Also, define op-
+erators only with their conventional meaning: + should be addition, binary *
+multiplication, [ ] access, ( ) call, etc. This is just advice, not a language rule, but it
+is good advice: conventional use of operators, such as + for addition, can signifi-
+cantly help us understand a program. After all, such use is the result of hundreds
+of years of experience with mathematical notation. Conversely, obscure opera-
+tors and unconventional use of operators can be a significant distraction and a
+source of errors
+
+8. Why should the public interface to a class be as small as possible?
+R:
+The first two principles can be summarized as “Keep the interface as small
+as possible, but no smaller.” We want our interface to be small because a small
+interface is easy to learn and easy to remember, and the implementer doesn’t
+waste a lot of time implementing unnecessary and rarely used facilities. A small
+interface also means that when something is wrong, there are only a few functions
+to check to find the problem. On average, the more public member functions are,
+the harder it is to find bugs — and please don’t get us started on the complexities of
+debugging classes with public data. But of course, we want a complete interface;
+otherwise, it would be useless. We couldn’t use an interface that didn’t allow us
+to do all we really needed.
+
+9. What does adding const to a member function do?
+R:
+Some variables are meant to be changed — that’s why we call them “variables” —
+but some are not; that is, we have “variables” representing immutable values.
+Those, we typically call constants or just const.
+
+When adding const to a member function it will make immutable.
+One we have declared a member function const , the compiler holds us to our promise not to
+modify the object.
+
+10. Why are “helper functions” best placed outside the class definition?
+R: See exe 6 too.
+
+When we design our interfaces to be minimal (though complete), we have to
+leave out lots of operations that are merely useful. A function that can be simply,
+elegantly, and efficiently implemented as a freestanding function (that is, as a non-
+member function) should be implemented outside the class. That way, a bug in
+that function cannot directly corrupt the data in a class object. Not accessing the
+representation is important because the usual debug technique is “Round up the
+usual suspects”; that is, when something goes wrong with a class, we first look at
+the functions that directly access the representation: one of those almost certainly
+did it. If there are a dozen such functions, we will be much happier than if there
+were 50.
+
+Helper functions are also called convenience functions, auxiliary functions, and many
+other things. The distinction between these functions and other nonmember func-
+tions is logical; that is, “helper function” is a design concept, not a programming
+language concept. The helper functions often take arguments of the classes that
+they are helpers of. There are exceptions, though: note leapyear() . Often, we use
+namespaces to identify a group of helper functions
+
+See ch 9,7,5 for more info
+

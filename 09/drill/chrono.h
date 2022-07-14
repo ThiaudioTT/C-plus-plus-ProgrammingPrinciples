@@ -1,4 +1,3 @@
-
 namespace chrono
 {
 
@@ -21,8 +20,8 @@ namespace chrono
     class Date
     {
     public:
-        Date(Month m, int Day, int Year);
         Date();
+        Date(Month m, int Day, int Year);
 
         //return func
         Month rmonth() {return month;}
@@ -31,6 +30,7 @@ namespace chrono
 
 
         // mutable func
+        void add_year();
         void add_month();
         void add_day();
 
