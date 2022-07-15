@@ -1,0 +1,8 @@
+1. List sets of plausible operations for the examples of real-world objects in
+§9.1 (such as toaster).
+
+Representation bookstack
+Operation bookstack++   (adds one more to the  stack)
+
+Representation AppleBag
+Operation --Applebag (minus one apple!)

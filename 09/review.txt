@@ -35,7 +35,7 @@ for Date (“A Date must represent a day in the past, present, or future”)
 they be defined outside the class? Why?
 R:
 When a function does not represent the class, they need to be outside. When a function is
-a helper function, they need to be outisde.
+a helper function, they need to be outisde. (In case  of declaration)
 
 Outro:
 The obvious rule of thumb is: Don’t put member function bodies in the class

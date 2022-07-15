@@ -2,20 +2,10 @@
 
 namespace chrono
 {
-    // constructor
-    Date::Date()
-    {
-        month = Month::jan;
-        day = 1;
-        year = 2000;
-    }
+    // constructors
+    Date::Date() : month(Month::jan), day(1), year(2000){};
 
-    Date::Date(Month m, int Day, int Year) // use constructor initialization.
-    {
-        month = m;
-        day = Day;
-        year = Year;
-    }
+    Date::Date(Month m, int Day, int Year) : month(m), day(Day), year(Year){};
 
 
     // member functions
