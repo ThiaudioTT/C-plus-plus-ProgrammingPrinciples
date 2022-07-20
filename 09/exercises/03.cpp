@@ -29,6 +29,7 @@ std::ostream& operator <<(std::ostream& os, Name_pairs& n)
     {
         os << "Name: " << n.getName(i) << ", Age: " << n.getAge(i) << std::endl;
     }
+    return os;
 }
 
 int main()

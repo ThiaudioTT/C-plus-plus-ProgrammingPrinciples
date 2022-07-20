@@ -4,6 +4,7 @@
 .vscode/
 .cmake-build-debug/
 .idea/
+/bin
 tempCodeRunnerFile.cpp
 test.cpp
 teste.cpp
