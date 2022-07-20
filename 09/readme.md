@@ -4,3 +4,8 @@ for a given application. We usually don’t have the luxury of being able to sea
 enough. Search further, and we might even come up with something that’s so
 elaborate that it is worse than the simple early solution. This is one meaning of
 the saying “The best is the enemy of the good” (Voltaire).
+
+
+
+# Articles
+https://docs.microsoft.com/en-us/cpp/standard-library/overloading-the-output-operator-for-your-own-classes

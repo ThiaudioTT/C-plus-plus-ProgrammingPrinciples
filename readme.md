@@ -19,6 +19,8 @@ This is only a guided C++ study. And should not only be the unique material to l
 
 Like the book itself says about exercises: "We do not expect you to do them all, but feel free to try". We have many sources to learn, so not doing an unique exercise won't harm you at all.
 
+I will do only the exercises that are good for my learning process. The exhausting ones that don't bring anything or I already know perfectly, will be skipped.
+
 For more, read chapter 0.
 
 # About readme.md files in the chapters:
@@ -35,7 +37,7 @@ Interesting Topics are topics, that I learned reading the book or other thing, w
 - https://www.programiz.com/cpp-programming
 - https://stackoverflow.com/questions/388242/the-definitive-c-book-guide-and-list
 
-## Youtubers:
+# Youtubers:
 
 https://www.youtube.com/c/TheChernoProject
 
