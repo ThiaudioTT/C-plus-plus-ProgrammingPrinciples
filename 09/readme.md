@@ -8,4 +8,11 @@ the saying “The best is the enemy of the good” (Voltaire).
 
 
 # Articles
+
+Output operator overload:
+
 https://docs.microsoft.com/en-us/cpp/standard-library/overloading-the-output-operator-for-your-own-classes
+
+
+Helper functions:
+https://stackoverflow.com/q/19270178/10803735

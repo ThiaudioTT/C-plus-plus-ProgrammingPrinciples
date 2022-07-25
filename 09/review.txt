@@ -88,6 +88,13 @@ modify the object.
 10. Why are “helper functions” best placed outside the class definition?
 R: See exe 6 too.
 
+From isocpp core:
+
+A helper function is a function (usually supplied by the writer of a class) that does not need direct
+ access to the representation of the class, yet is seen as part of the useful interface to the class.
+  Placing them in the same namespace as the class makes their relationship to the class obvious and 
+  allows them to be found by argument dependent lookup.  
+
 When we design our interfaces to be minimal (though complete), we have to
 leave out lots of operations that are merely useful. A function that can be simply,
 elegantly, and efficiently implemented as a freestanding function (that is, as a non-
@@ -108,3 +115,9 @@ namespaces to identify a group of helper functions
 
 See ch 9,7,5 for more info
 
+This is a hard topic, see https://stackoverflow.com/q/19270178/10803735
+
+See in cpp core line:
+
+Date next_weekday(Date);
+Does not need to be in Date.
